@@ -1,4 +1,3 @@
-import React from "react";
 import AbstractForm from "../components/AsbtractForm"
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
@@ -49,15 +48,15 @@ const Registration = () => {
   ];
 
   const navigate = useNavigate();
-  axios.post('http://localhost:3001/users/session-hook')
+  axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook')
   .then(()=>navigate(PathConstants.ACCOUNT))
-  .catch((err)=>console.log('session exist'))
+  .catch((err)=>console.log('session exist: ' + err.message));
   return (
     <div 
       className="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen"
       style={{ backgroundImage: `url(${back_pic})` }}
     >
-      <div className="bg-black min-h-screen bg-opacity-50 min-h-screen flex justify-center items-center">
+      <div className="bg-black min-h-screen bg-opacity-50 flex justify-center items-center">
         
         <div className="backdrop-blur-md rounded-lg shadow-xl bg-white/30 p-9 ">
 

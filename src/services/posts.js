@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/posts'
+const baseUrl = 'https://kurylenko-photography-backend.onrender.com/api/posts'
 
 const getPost = async (id) => axios.get(baseUrl + `/${id}`).then(response => response.data)
 

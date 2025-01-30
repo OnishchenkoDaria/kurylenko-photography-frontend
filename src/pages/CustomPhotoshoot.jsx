@@ -1,4 +1,3 @@
-import React from 'react';
 import Payment from '../components/order/Payment.jsx';
 import back_pic from '../assets/photo5.jpg';
 import axios from 'axios';
@@ -11,7 +10,7 @@ const CustomPhotoshoot = () => {
   
   //unable the not registered users to buy the phohtoshoot
    const navigate = useNavigate();
-  axios.post('http://localhost:3001/users/session-hook')
+  axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook')
   .then((par)=>{
     console.log('welcome', par);
   })

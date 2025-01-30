@@ -37,7 +37,7 @@ const Login = () => {
   ];
   
   const navigate = useNavigate();
-  axios.post('http://localhost:3001/users/session-hook')
+  axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook')
   .then(()=> {
     navigate(PathConstants.ACCOUNT);
   })

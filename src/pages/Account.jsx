@@ -16,7 +16,7 @@ const Account = () => {
     const fetchData = async () => {
       //session check
       try {
-        const sessionResponse = await axios.post('http://localhost:3001/users/session-hook');
+        const sessionResponse = await axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook');
         //const message = 'welcome, ' + sessionResponse.data;
         setHello(sessionResponse.data);
       } catch {
