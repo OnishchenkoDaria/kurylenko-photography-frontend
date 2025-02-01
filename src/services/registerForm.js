@@ -63,6 +63,26 @@ const loginUser = async (newUser) => {
     }
 }
 
+const sessionHook = async () => {
+    try {
+        const result = await  axios.post(baseUrl+'session-hook');
+        console.log('Session exists: ', result.data);
+        return result.data;
+    } catch (error){
+        if (error.response){
+            console.log('server send back an error status:', error.response.status);
+            console.log('session exist, error message from the server:', error.response.data.error);
+        }
+        else if (error.request){
+            console.error('no response received from the server');
+        }
+        else {
+            console.error('error during request setup:', error.message);
+        }
+        return null;
+    }
+}
+
 const getUser = async () => {
     const result = await axios.get(baseUrl+'user')
     try{
@@ -74,7 +94,7 @@ const getUser = async () => {
 }
 
 const getRole = async() => {
-    const result = await axios.get(baseUrl + 'get-role/')
+    const result = await axios.get(baseUrl+'get-role')
     try{
         const role = result.data.role
         console.log("Role: ", role)
@@ -87,9 +107,7 @@ const getRole = async() => {
 
 const logOut = async () => {
     const result = axios.post(baseUrl+'log-out')
-   
     try{
-       
         console.log((await result).data.message)
         console.log('Logged out');
         return true
@@ -100,7 +118,6 @@ const logOut = async () => {
 }
 
 const hash = async(value) => {
-    console.log(value)
     const result = await axios.post(baseUrl + 'hashing', {value});
     try{
         const { data, signature } = result.data;
@@ -142,6 +159,4 @@ const getUserOrders = async() => {
     }
 }
 
-export default{
-    addUser, loginUser, getUser, getRole, logOut, hash, getUserOrders
-}
+export default { addUser, loginUser, sessionHook, getUser, getRole, logOut, hash, getUserOrders }

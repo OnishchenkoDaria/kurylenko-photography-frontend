@@ -1,10 +1,10 @@
-import { useState, useLayoutEffect } from 'react';
+import {useState, useLayoutEffect, useEffect} from 'react';
 import SessionButtons from '../components/account/SessionButton.jsx';
-import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom';
 import PhotoshootStateCard from '../components/account/PhotoshootStateCard.jsx';
 import UserService from '../services/registerForm.js';
+import userService from "../services/registerForm.js";
 
 const Account = () => {
   const [hello, setHello] = useState();
@@ -12,17 +12,24 @@ const Account = () => {
   
   const navigate = useNavigate();
 
-  useLayoutEffect(() => {
-    const fetchData = async () => {
-      //session check
-      try {
-        const sessionResponse = await axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook');
-        //const message = 'welcome, ' + sessionResponse.data;
-        setHello(sessionResponse.data);
+  //session check
+  useEffect(() => {
+    async function checkSession() {
+      try{
+        const result = await userService.sessionHook();
+        if(result) {
+          setHello(result);
+        }
       } catch {
         navigate(PathConstants.LOGIN);
       }
+    }
 
+    checkSession();
+  }, []);
+
+  useLayoutEffect(() => {
+    const fetchData = async () => {
       //getting user's orders data
       try{
         const ordersData = await UserService.getUserOrders();

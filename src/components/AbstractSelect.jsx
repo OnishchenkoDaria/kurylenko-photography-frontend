@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import { useEffect, useState } from 'react';
 
 //make the buttonPressed marker relay on the name of the input 
 
@@ -59,6 +59,6 @@ function AbstractSelect(props, {changeState} ) {
       </div>
     </div>
   );
-};
+}
 
 export default AbstractSelect;

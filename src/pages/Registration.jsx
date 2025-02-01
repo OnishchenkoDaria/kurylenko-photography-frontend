@@ -1,10 +1,11 @@
 import AbstractForm from "../components/AsbtractForm"
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom'
 import back_pic from '../assets/photo3.jpg'
 import { Link } from "react-router-dom";
+import {useEffect} from "react";
+import userService from "../services/registerForm.js";
 
 //icons
 import { eye } from "react-icons-kit/feather/eye";
@@ -48,9 +49,23 @@ const Registration = () => {
   ];
 
   const navigate = useNavigate();
-  axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook')
-  .then(()=>navigate(PathConstants.ACCOUNT))
-  .catch((err)=>console.log('session exist: ' + err.message));
+
+  //session check
+  useEffect(() => {
+    async function checkSession() {
+      try{
+        const result = await userService.sessionHook();
+        if(result) {
+          navigate(PathConstants.ACCOUNT);
+        }
+      } catch {
+        console.log('User not logged in, allowing login');
+      }
+    }
+
+    checkSession();
+  }, []);
+
   return (
     <div 
       className="bg-cover bg-center bg-no-repeat bg-fixed min-h-screen"

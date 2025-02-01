@@ -1,4 +1,3 @@
-import React from 'react';
 import PhotoshootPlans from '../components/order/PhotoshootPlans.jsx';
 import PathConstants from '../routes/pathConstants';
 import {Link} from 'react-router-dom';

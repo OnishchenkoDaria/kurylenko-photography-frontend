@@ -1,22 +1,32 @@
 import Payment from '../components/order/Payment.jsx';
 import back_pic from '../assets/photo5.jpg';
-import axios from 'axios';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from "react-router-dom";
+import {useEffect} from "react";
+import userService from '../services/registerForm.js';
 
 // flex + justify-center (center for X) + items-center (center for Y)
 
 const CustomPhotoshoot = () => {
   
-  //unable the not registered users to buy the phohtoshoot
-   const navigate = useNavigate();
-  axios.post('https://kurylenko-photography-backend.onrender.com/users/session-hook')
-  .then((par)=>{
-    console.log('welcome', par);
-  })
-  .catch(() => {
-    navigate(PathConstants.LOGIN);
-  })
+  //session chack : not registered users cannot buy the phohtoshoot
+  const navigate = useNavigate();
+
+  //session check
+  useEffect(() => {
+    async function checkSession() {
+      try{
+        const result = await userService.sessionHook();
+        if(result) {
+          console.log('creating custom photoshoot for ' + result);
+        }
+      } catch {
+        navigate(PathConstants.LOGIN);
+      }
+    }
+
+    checkSession();
+  }, []);
   
   return (
     <div 
