@@ -1,4 +1,4 @@
-import {useState, useLayoutEffect, useEffect} from 'react';
+import {useState, useLayoutEffect} from 'react';
 import SessionButtons from '../components/account/SessionButton.jsx';
 import PathConstants from '../routes/pathConstants';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,9 @@ const Account = () => {
   
   const navigate = useNavigate();
 
-  //session check
-  useEffect(() => {
+  useLayoutEffect(() => {
+
+    //session check
     async function checkSession() {
       try{
         const result = await userService.sessionHook();
@@ -26,9 +27,7 @@ const Account = () => {
     }
 
     checkSession();
-  }, []);
 
-  useLayoutEffect(() => {
     const fetchData = async () => {
       //getting user's orders data
       try{
