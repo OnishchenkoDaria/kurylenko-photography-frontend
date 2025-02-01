@@ -57,9 +57,11 @@ const Registration = () => {
         const result = await userService.sessionHook();
         if(result) {
           navigate(PathConstants.ACCOUNT);
+        } else {
+          console.log('User not logged in, allowing login');
         }
-      } catch {
-        console.log('User not logged in, allowing login');
+      } catch (error) {
+        console.log("Error while checking session: " + error)
       }
     }
 

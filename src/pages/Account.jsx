@@ -20,9 +20,11 @@ const Account = () => {
         const result = await userService.sessionHook();
         if(result) {
           setHello(result);
+        } else{
+          navigate(PathConstants.LOGIN);
         }
-      } catch {
-        navigate(PathConstants.LOGIN);
+      } catch (error) {
+        console.log("Error while checking session: " + error)
       }
     }
 

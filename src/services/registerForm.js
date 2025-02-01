@@ -71,7 +71,7 @@ const sessionHook = async () => {
     } catch (error){
         if (error.response){
             console.log('server send back an error status:', error.response.status);
-            console.log('session exist, error message from the server:', error.response.data.error);
+            console.log('error message from the server:', error.response.data.error);
         }
         else if (error.request){
             console.error('no response received from the server');
