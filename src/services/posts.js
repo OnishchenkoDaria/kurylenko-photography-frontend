@@ -1,6 +1,9 @@
 import axios from 'axios'
 const baseUrl = 'https://kurylenko-photography-backend.onrender.com/api/posts'
 
+axios.defaults.withCredentials = true; // Include credentials (like cookies) in the request
+axios.defaults.crossDomain = true; // Enable cross-domain requests
+
 const getPost = async (id) => axios.get(baseUrl + `/${id}`).then(response => response.data)
 
 const getAllPosts = async () => axios.get(baseUrl).then(response => response.data)

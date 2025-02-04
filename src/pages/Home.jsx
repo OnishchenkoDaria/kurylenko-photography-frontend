@@ -19,17 +19,8 @@ const Home = () => {
         <PostCreate />
       </div>
       <ImageCarousel />
-      <Row className="d-flex justify-content-center">
-        <Col sm={12} md={8}>
-          <div className="d-grid gap-2 mx-5">
-            <Button variant="success" size="lg">
-              <Link to={PathConstants.PAYMENT} className='text-decoration-none text-white'>Buy Photoshoot</Link>
-            </Button>
-          </div>
-        </Col>
-      </Row>
+        <PhotographerExperience />
       <PostDisplayMain />
-      <PhotographerExperience />
     </div>
   );
 };
